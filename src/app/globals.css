@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════════════════════ */
+:root {
+  --bg-primary:        #FFFFFF;
+  --bg-secondary:      #F3F4F6;
+  --text-primary:      #0A2540;
+  --text-secondary:    #627D98;
+  --accent-primary:    #0066FF;
+  --accent-neon:       #00D4B2;
+  --border-structural: #E2E8F0;
+  --ease-premium:      cubic-bezier(0.16, 1, 0.3, 1);
+  --font-mono:         var(--font-jetbrains), "Fira Code", monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE RESET
+═══════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--border-structural); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity  580ms var(--ease-premium),
+    transform 580ms var(--ease-premium);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+.reveal-delay-4 { transition-delay: 320ms; }
+
+/* ═══════════════════════════════════════════════════════════════
+   BLUEPRINT GRID
+═══════════════════════════════════════════════════════════════ */
+.blueprint-grid {
+  background-image:
+    linear-gradient(var(--border-structural) 0.5px, transparent 0.5px),
+    linear-gradient(90deg, var(--border-structural) 0.5px, transparent 0.5px);
+  background-size: 80px 80px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GLASSMORPHISM
+═══════════════════════════════════════════════════════════════ */
+.glass {
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 0.5px solid rgba(255, 255, 255, 0.50);
+  box-shadow:
+    0 8px 32px rgba(10, 37, 64, 0.06),
+    0 1px 0 rgba(255, 255, 255, 0.80) inset;
+}
+
+.nav-glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════════════════════ */
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  transition: all 300ms var(--ease-premium);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.btn-solid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.10);
+  transform: translateX(-100%);
+  transition: transform 400ms var(--ease-premium);
+}
+.btn-solid:hover::after { transform: translateX(0); }
+.btn-solid:hover { background: #004FCC; border-color: #004FCC; }
+
+.btn-ghost {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 4px;
+  transition: all 300ms var(--ease-premium);
+}
+.btn-ghost:hover { color: var(--text-primary); }
+
+/* ═══════════════════════════════════════════════════════════════
+   STATUS PILL
+═══════════════════════════════════════════════════════════════ */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--accent-neon);
+  background: rgba(0, 212, 178, 0.08);
+  border: 0.5px solid rgba(0, 212, 178, 0.30);
+  padding: 0.375rem 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.status-pill::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA PANEL CORNER TICKS
+═══════════════════════════════════════════════════════════════ */
+.cta-panel::before,
+.cta-panel::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--accent-primary);
+  border-style: solid;
+}
+.cta-panel::before {
+  top: -1px; left: -1px;
+  border-width: 1.5px 0 0 1.5px;
+}
+.cta-panel::after {
+  bottom: -1px; right: -1px;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPOGRAPHY UTILITIES
+═══════════════════════════════════════════════════════════════ */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   KEYFRAMES
+═══════════════════════════════════════════════════════════════ */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Navbar dropdown fade-down — referenced in Navbar.tsx via style jsx global */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) translateX(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+  }
+}
+
+/* Hero underline reveal */
+@keyframes underlineReveal {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Float — subtle levitation for canvas HUD cards */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+
+/* Scanning beam — used in canvas context only (JS-driven), kept for reference */
+@keyframes scanBeam {
+  from { top: -4%; }
+  to   { top: 104%; }
+}
+
+/* Spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE TRANSITION OVERLAY
+═══════════════════════════════════════════════════════════════ */
+.page-enter {
+  animation: pageFadeIn 350ms var(--ease-premium) forwards;
+}
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
