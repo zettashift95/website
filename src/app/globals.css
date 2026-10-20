@@ -1,6 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary:     #FFFFFF;
+  --color-bg-secondary:   #F3F4F6;
+  --color-text-primary:   #0A2540;
+  --color-text-secondary: #627D98;
+  --color-accent-primary: #0066FF;
+  --color-accent-neon:    #00D4B2;
+  --color-border-s:       #E2E8F0;
+
+  --font-family-sans: var(--font-inter), system-ui, sans-serif;
+  --font-family-mono: var(--font-jetbrains), "Fira Code", monospace;
+
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 12s linear infinite;
+  --animate-reveal-up: reveal-up 600ms cubic-bezier(0.16,1,0.3,1) forwards;
+  --animate-float: float 4s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
 
 /* ═══════════════════════════════════════════════════════════════
    DESIGN TOKENS

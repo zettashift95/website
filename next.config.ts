@@ -1,13 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Enable React strict mode for better dev experience
   reactStrictMode: true,
-
-  // Compression
   compress: true,
 
-  // Image optimization
+  // Tell Turbopack where the project root is
+  turbopack: {
+    root: __dirname,
+  },
+
   images: {
     formats: ["image/avif", "image/webp"],
   },
